@@ -44,7 +44,7 @@ class Model(object):
         None
         """
         current_label = self.get_number_of_nodes()
-        if node.label is "":
+        if node.label is None:
             node.set_label(current_label)
         self.nodes[node.label] = node
         
@@ -74,7 +74,7 @@ class Model(object):
         if self.mtype != element.etype:
             raise ValueError("Element type must be "+self.mtype)
         current_label = self.get_number_of_elements()
-        if element.label is "":
+        if element.label is None:
             element.set_label(current_label)
         self.elements[element.label] = element
         # Assign this element to "xxxx" 
@@ -298,7 +298,7 @@ class Element(object):
     """
     def __init__(self,etype):
         self.etype = etype # element type
-        self.label = "" # label (reassignment -> Model.addElement)
+        self.label = None
         self._fx = 0.0
         self._fy = 0.0
         self._sx = 0.0
@@ -381,7 +381,7 @@ class Node(object):
         self.coordinates = coordinates
         self.x = coordinates[0] # usable prop
         self.y = coordinates[1] # usable prop
-        self._label = ""
+        self._label = None
         self._ux = np.nan
         self._uy = np.nan
         self._ur = np.nan
